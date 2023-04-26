@@ -24,5 +24,7 @@ gpu_freq_str="$(vcgencmd measure_clock core)"
 arm_freq_words="$(echo $arm_freq_str | tr "=" "\n")"
 gpu_freq_words="$(echo $gpu_freq_str | tr "=" "\n")"
 
+echo $arm_freq_words
+
 printf "CPU Frequency: \t${arm_freq_words[1]} Hz\n"
 printf "GPU Frequency: \t${gpu_freq_words[1]} Hz\n"
