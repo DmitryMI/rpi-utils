@@ -6,9 +6,14 @@ LINES=20 top -n 5 -o +%CPU -w
 
 # Get total memory
 echo "Total memory:"
+vcgencmd get_config total_mem
 vcgencmd get_mem arm && vcgencmd get_mem gpu
 echo ""
 
-# Read cpu temperature
+# Get cpu temperature
 vcgencmd measure_temp
 echo ""
+
+# Get frequencies
+vcgencmd measure_clock arm
+vcgencmd measure_clock core
