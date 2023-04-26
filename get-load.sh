@@ -18,11 +18,11 @@ echo ""
 
 # Get frequencies
 
-arm_freq_str= $(vcgencmd measure_clock arm)
-gpu_freq_str = $(vcgencmd measure_clock core)
+arm_freq_str="$(vcgencmd measure_clock arm)"
+gpu_freq_str="$(vcgencmd measure_clock core)"
 
-arm_freq_words=$(echo $arm_freq_str | tr "=" "\n")
-gpu_freq_words=$(echo $gpu_freq_str | tr "=" "\n")
+arm_freq_words="$(echo $arm_freq_str | tr "=" "\n")"
+gpu_freq_words="$(echo $gpu_freq_str | tr "=" "\n")"
 
-echo "CPU Frequency: \tarm_freq_words[1] Hz"
-echo "GPU Frequency: \tgpu_freq_words[1] Hz"
+printf "CPU Frequency: \t$arm_freq_words[1] Hz"
+printf "GPU Frequency: \t$gpu_freq_words[1] Hz"
