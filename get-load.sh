@@ -4,7 +4,7 @@
 # LINES=20 top -n 5 -o +%MEM -w
 
 # Get task list, CPU and MEM load, soring by CPU
-LINES=20 top -n 5 -o +%CPU -w
+# LINES=20 top -n 5 -o +%CPU -w
 
 # Get total memory
 echo "Total memory:"
@@ -23,12 +23,12 @@ gpu_freq_str="$(vcgencmd measure_clock core)"
 
 arm_freq_words="$(echo $arm_freq_str | tr "=" "\n")"
 gpu_freq_words="$(echo $gpu_freq_str | tr "=" "\n")"
-arm_hz = ${arm_freq_words[1]}
-echo "arm_hz = $arm_hz"
-gpu_hz = ${gpu_freq_words[1]}
+arm_hz="$(echo $arm_freq_words | awk '{print $2}')"
+gpu_hz="$(echo $gpu_freq_words | awk '{print $2}')"
 
-echo $arm_freq_words
+arm_mhz=$(awk -v hz=$arm_hz 'BEGIN { print  ( hz / 1000000 ) }')
+gpu_mhz=$(awk -v hz=$gpu_hz 'BEGIN { print  ( hz / 1000000 ) }')
 
-printf "CPU Frequency: \t${arm_hz} Hz\n"
-printf "GPU Frequency: \t${gpu_hz} Hz\n"
+printf "CPU Frequency: \t$arm_mhz MHz\n"
+printf "GPU Frequency: \t$gpu_mhz MHz\n"
 
